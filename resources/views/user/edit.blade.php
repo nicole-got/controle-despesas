@@ -64,22 +64,16 @@
 								<p>Dashboard</p>
 							</a>
 						</li>
-						{{-- <li class="nav-item">
-							<a href="{{route('user.index')}}">
-								<i class="far fa-calendar-alt"></i>
-								<p>Usuario</p>
-							</a>
-						</li> --}}
 						<li class="nav-item">
-							<a href="{{route('student.index')}}">
+							<a href="{{route('expense.index')}}">
 								<i class="fas fa-desktop"></i>
-								<p>Aluno</p>
+								<p>Despesa</p>
 							</a>
                         </li>
                         <li class="nav-item">
-							<a href="{{route('course.index')}}">
+							<a href="{{route('user.index')}}">
 								<i class="fas fa-desktop"></i>
-								<p>Curso</p>
+								<p>Usuário</p>
 							</a>
 						</li>
 					</ul>

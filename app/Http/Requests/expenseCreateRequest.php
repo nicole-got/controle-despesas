@@ -4,7 +4,7 @@ namespace App\Http\Requests;
 
 use Illuminate\Foundation\Http\FormRequest;
 
-class userCreateRequest extends FormRequest
+class expenseCreateRequest extends FormRequest
 {
 
     public function authorize()
@@ -12,6 +12,7 @@ class userCreateRequest extends FormRequest
         return true;
     }
 
+    
     public function rules()
     {
         return [

@@ -47,15 +47,15 @@
 							</a>
 						</li>
 						<li class="nav-item">
-							<a href="{{route('student.index')}}">
+							<a href="{{route('expense.index')}}">
 								<i class="fas fa-desktop"></i>
-								<p>Aluno</p>
+								<p>Despesa</p>
 							</a>
                         </li>
                         <li class="nav-item">
-							<a href="{{route('course.index')}}">
+							<a href="{{route('user.index')}}">
 								<i class="fas fa-desktop"></i>
-								<p>Curso</p>
+								<p>Usuário</p>
 							</a>
 						</li>
 					</ul>
@@ -79,56 +79,52 @@
 						<div class="col-md-12">
 							<div class="card">
 								<div class="card-header">
-									<div class="card-title">Alunos</div>
+									<div class="card-title">Despesas</div>
 								</div>
 								<div class="card-body">
-									@if($students == "[]")
-										<div class="text-center">Não há alunos cadastrados</div>
+									@if($expenses == "[]")
+										<div class="text-center">Não há despesa cadastrados</div>
 									@else
-										{!! Form::open( ['route' => ['student.search'], 'method' => 'post']) !!}
-												{!! Form::text('id', null, ['id '=> 'id',  'class' => 'form-control form-control-sm', 'type' => 'search', 'placeholder' => 'ID Aluno']) !!}
+										{!! Form::open( ['route' => ['expense.search'], 'method' => 'post']) !!}
+												{!! Form::text('id', null, ['id '=> 'id',  'class' => 'form-control form-control-sm', 'type' => 'search', 'placeholder' => 'ID Despesa']) !!}
 													{!! Form::submit('Pesquisar', ['class'=> 'btn btn-primary btn-round ml-auto']) !!}
 										{!! Form::close() !!}
 										<table class="table table-head-bg-danger">
 											<thead>
 												<tr>
 													<th scope="col">#</th>
-													<th scope="col">Curso</th>
-													<th scope="col">Nome</th>
-													<th scope="col">Matrícula</th>
-													<th scope="col">UF</th>
-													<th scope="col">Cidade</th>
-													<th scope="col">Bairro</th>
-													<th scope="col">Rua</th>
-													<th scope="col">Numero</th>
-													<th scope="col">Complemento</th>
+													<th scope="col">Foto</th>
+													<th scope="col">Usuário</th>
+													<th scope="col">Descrição</th>
+													<th scope="col">Valor</th>
+													<th scope="col">Data</th>
 													<th scope="col">Ação</th>
 												</tr>
 											</thead>
 											<tbody>
-												@foreach($students as $student)
+												@foreach($expenses as $expense)
 													<tr>
-														<td>{{$student->id}}</td>
-														<td>{{$student->course_id}}</td>
-														<td>{{$student->name}}</td>
-														<td>{{$student->registration}}</td>
-														<td>{{$student->uf}}</td>
-														<td>{{$student->city}}</td>
-														<td>{{$student->neighborhood}}</td>
-														<td>{{$student->street}}</td>
-														<td>{{$student->number}}</td>
-														<td>{{$student->complement}}</td>
+                                                        <td>{{$expense->id}}</td>
+                                                        <td>
+                                                            <div class="notif-img"> 
+                                                                <img  src="{{ asset('/storage/img/'.$expense->image.'') }}" alt="Img Profile" style="max-width: 80px;max-height: 100px;">
+                                                                {{-- <img src="https://via.placeholder.com/50x50" alt="Img Profile"> --}}
+                                                            </div>
+                                                        </td>
+														<td>{{$expense->user_id}}</td>
+														<td>{{$expense->description}}</td>
+														<td>{{'R$ '.number_format($expense->value,2, ',', '.' ) }}</td>
+														<td>{{date('d/m/Y', strtotime($expense->date))}}</td>
 														<td>
-															{!! Form::open( ['route' => ['student.destroy', $student->id ], 'method' => 'delete']) !!}
+															{!! Form::open( ['route' => ['expense.destroy', $expense->id ], 'method' => 'delete']) !!}
 																{!! Form::submit('Remover') !!}
 															{!! Form::close() !!}
-														<a href="{{ route('student.edit', $student->id) }}">Editar</a>
+														<a href="{{ route('expense.edit', $expense->id) }}">Editar</a>
 														</td>
 													</tr>
 												@endforeach
 											</tbody>
 										</table>
-										{!! $students->links() !!}
 									@endif
 								</div>
 							</div>
@@ -138,36 +134,37 @@
 						<div class="col-md-12">
 							<div class="card">
 								<div class="card-header">
-									<div class="card-title">Cursos</div>
+									<div class="card-title">Usuários</div>
 								</div>
 								<div class="card-body">
-									@if($courses == "[]")
-										<div class="text-center">Não há cursos cadastrados</div>
+									@if($users == "[]")
+										<div class="text-center">Não há usuário cadastrados</div>
 									@else
 										<table class="table table-head-bg-success">
 											<thead>
 												<tr>
 													<th scope="col">#</th>
 													<th scope="col">Nome</th>
+													<th scope="col">Email</th>
 													<th scope="col">Ação</th>
 												</tr>
 											</thead>
 											<tbody>
-												@foreach($courses as $course)
+												@foreach($users as $user)
 													<tr>
-														<td>{{$course->id}}</td>
-														<td>{{$course->name}}</td>
+														<td>{{$user->id}}</td>
+														<td>{{$user->name}}</td>
+														<td>{{$user->email}}</td>
 														<td>
-															{!! Form::open( ['route' => ['course.destroy', $course->id ], 'method' => 'delete']) !!}
+															{!! Form::open( ['route' => ['user.destroy', $user->id ], 'method' => 'delete']) !!}
 																{!! Form::submit('Remover') !!}
 															{!! Form::close() !!}
-														<a href="{{ route('course.edit', $course->id) }}">Editar</a>
+														<a href="{{ route('user.edit', $user->id) }}">Editar</a>
 														</td>
 													</tr>
 												@endforeach
 											</tbody>
 										</table>
-										{!! $courses->links() !!}
 									@endif
 								</div>
 							</div>

@@ -17,16 +17,11 @@ class RepositoryServiceProvider extends ServiceProvider
         //
     }
 
-    /**
-     * Bootstrap services.
-     *
-     * @return void
-     */
+
     public function boot()
     {
         $this->app->bind(\App\Repositories\UserRepository::class, \App\Repositories\UserRepositoryEloquent::class);
-        $this->app->bind(\App\Repositories\StudentRepository::class, \App\Repositories\StudentRepositoryEloquent::class);
-        $this->app->bind(\App\Repositories\CourseRepository::class, \App\Repositories\CourseRepositoryEloquent::class);
+        $this->app->bind(\App\Repositories\ExpenseRepository::class, \App\Repositories\ExpenseRepositoryEloquent::class);
         Schema::defaultStringLength(191);
         //:end-bindings:
     }

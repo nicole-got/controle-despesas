@@ -2,7 +2,7 @@
 <html lang="en">
 <head>
 	<meta http-equiv="X-UA-Compatible" content="IE=edge" />
-	<title>Aluno</title>
+	<title>Despesa</title>
 	<meta content='width=device-width, initial-scale=1.0, shrink-to-fit=no' name='viewport' />
 	<link rel="icon" href="../https://via.placeholder.com/32x32" type="image/x-icon"/>
 	
@@ -58,16 +58,22 @@
 			<div class="sidebar-wrapper scrollbar scrollbar-inner">
 				<div class="sidebar-content">
 					<ul class="nav nav-secondary">
+                        <li class="nav-item">
+							<a href="{{route('user.dashboard')}}">
+								<i class="far fa-calendar-alt"></i>
+								<p>Dashboard</p>
+							</a>
+						</li>
 						<li class="nav-item">
-							<a href="{{route('student.index')}}">
+							<a href="{{route('expense.index')}}">
 								<i class="fas fa-desktop"></i>
-								<p>Aluno</p>
+								<p>Despesa</p>
 							</a>
                         </li>
                         <li class="nav-item">
-							<a href="{{route('course.index')}}">
+							<a href="{{route('user.index')}}">
 								<i class="fas fa-desktop"></i>
-								<p>Curso</p>
+								<p>Usuário</p>
 							</a>
 						</li>
 					</ul>
@@ -78,7 +84,7 @@
 			<div class="content">
 				<div class="page-inner">
 					<div class="page-header">
-						<h4 class="page-title">Aluno</h4>
+						<h4 class="page-title">Despesa</h4>
 						<ul class="breadcrumbs">
 						</ul>
 					</div>
@@ -86,86 +92,51 @@
 						<div class="col-md-12">
 							<div class="card">
 								<div class="card-header">
-									<div class="card-title">Editar aluno</div>
+									<div class="card-title">Editar Despesa</div>
 								</div>
 								<div class="card-body">
 									<div class="row">
 										<div class="col-md-12 col-lg-12">
-                                            {!! Form::model($student,['route'=>['student.update', $student->id], 'method'=> 'put']) !!}
+                                            {!! Form::model($expense,['route'=>['expense.update', $expense->id], 'method'=> 'put','enctype'=>"multipart/form-data"]) !!}
                                             <div class="row">
-                                                <div class="col-md-3 col-lg-3">
-                                                    <div class="form-group">
-                                                        <label for="status">Status</label>
-                                                        {!! Form::select('status', ['ativo'=>'ativo','inativo'=>'inativo'], null, ['id '=> 'status',  'class' => 'form-control', 'required' => true]) !!}
-                                                    </div>
-                                                </div>
-                                                <div class="col-md-3 col-lg-3">
-                                                    <div class="form-group">
-                                                        <label for="registration">Matrícula</label>
-                                                        {!! Form::text('registration', null, ['id '=> 'registration',  'class' => 'form-control', 'placeholder' => 'mátricula', 'type' => 'matricula']) !!}
-                                                    </div>
-                                                </div>
-                                                <div class="col-md-3 col-lg-3">
-                                                    <div class="form-group">
-                                                        <label for="name">Name</label>
-                                                        {!! Form::text('name', null, ['id '=> 'name',  'class' => 'form-control', 'placeholder' => 'Nome', 'required' => true]) !!}
-                                                    </div>
-                                                </div>
-                                            </div>
-                                            <div class="form-group">
-                                                <label for="course_id">Curso</label>
-                                                {!! Form::select('course_id', $courses ?? [], null, ['id '=> 'course',  'class' => 'form-control', 'required' => true]) !!}
-											</div>
-                                            <div class="row">
-                                                <div class="col-md-10 col-lg-10">
-                                                    <div class="form-group form-floating-label">
-                                                        <label for="cep">CEP</label>
-                                                        {!! Form::text('cep', null, ['wire:model' => 'cep','id '=> 'cep',  'class' => 'form-control', 'placeholder' => 'CEP', 'type' => 'cep', 'required' => true]) !!}
-                                                    </div>
-                                                </div>
-                                                <div class="col-md-2 col-lg-2">
-                                                    <div class="form-group" style="margin-top: 28px !important;">
-                                                        <button id="buscaCep" class="btn btn-warning">Pesquisar</button>
+                                                <div class="col-md-12 col-lg-12">
+                                                    <div class="form-group form-show-validation row">
+                                                        <label class="text-right">Upload Image <span class="required-label">*</span></label>
+                                                        <div class="col-lg-4 col-md-9 col-sm-8">
+                                                            <div class="input-file input-file-image">
+                                                                <img class="img-upload-preview img-circle" width="100" height="100" src="https://placehold.it/100x100" alt="preview">
+                                                                {!! Form::file('image', ['name' => 'image','id '=> 'uploadImg',  'class' => 'form-control form-control-file','accept'=>"image/*", 'required' => true]) !!}
+                                                                <label for="uploadImg" class="btn btn-primary btn-round btn-lg"><i class="fa fa-file-image"></i> Upload a Image</label>
+                                                            </div>
+                                                        </div>
                                                     </div>
                                                 </div>
                                             </div>
                                             <div class="row">
-                                                <div class="col-md-4 col-lg-4">
+                                                <div class="col-md-6 col-lg-6">
+                                                    <div class="form-group">
+                                                        <label for="user_id">Usuário<span class="required-label">*</span></label></label>
+                                                        {!! Form::select('user_id', $users ?? [], null, ['id '=> 'user',  'class' => 'form-control', 'required' => true]) !!}
+                                                    </div>
+                                                </div>
+                                                <div class="col-md-6 col-lg-6">
+                                                    <div class="form-group">
+                                                        <label for="description">Descrição<span class="required-label">*</span></label></label>
+                                                        {!! Form::text('description', null, ['id '=> 'description',  'class' => 'form-control', 'placeholder' => 'Descrição', 'required' => true]) !!}
+                                                    </div>
+                                                </div>
+                                            </div>
+                                            <div class="row">
+                                                <div class="col-md-6 col-lg-6">
                                                     <div class="form-group form-floating-label">
-                                                        <label for="uf">UF</label>
-                                                        {!! Form::text('uf', null, ['id '=> 'uf',  'class' => 'form-control', 'placeholder' => 'UF', 'type' => 'uf', 'required' => true]) !!}
+                                                        <label for="value">Valor<span class="required-label">*</span></label></label>
+                                                        {!! Form::text('value', null, ['id '=> 'value',  'class' => 'form-control', 'placeholder' => '999999.00', 'type' => 'value', 'required' => true]) !!}
                                                     </div>
                                                 </div>  
-                                                <div class="col-md-4 col-lg-4">
+                                                <div class="col-md-6 col-lg-6">
                                                     <div class="form-group form-floating-label">
-                                                        <label for="city">Cidade</label>
-                                                        {!! Form::text('city', null, ['id '=> 'city',  'class' => 'form-control', 'placeholder' => 'Cidade', 'type' => 'city', 'required' => true]) !!}
-                                                    </div>
-                                                </div>
-                                                <div class="col-md-4 col-lg-4">
-                                                    <div class="form-group form-floating-label">
-                                                        <label for="neighborhood">Bairro</label>
-                                                        {!! Form::text('neighborhood', null, ['id '=> 'neighborhood',  'class' => 'form-control', 'placeholder' => 'Bairro', 'type' => 'neighborhood', 'required' => true]) !!}
-                                                    </div>
-                                                </div> 
-                                            </div>
-                                            <div class="row">
-                                                <div class="col-md-4 col-lg-4">
-                                                    <div class="form-group form-floating-label">
-                                                        <label for="street">Rua</label>
-                                                        {!! Form::text('street', null, ['id '=> 'street',  'class' => 'form-control', 'placeholder' => 'Rua', 'type' => 'street', 'required' => true]) !!}
-                                                    </div>
-                                                </div> 
-                                                <div class="col-md-4 col-lg-4">
-                                                    <div class="form-group form-floating-label">
-                                                        <label for="number">Número</label>
-                                                        {!! Form::text('number', null, ['id '=> 'number',  'class' => 'form-control', 'placeholder' => 'Número', 'type' => 'number', 'required' => true]) !!}
-                                                    </div>
-                                                </div>
-                                                <div class="col-md-4 col-lg-4">
-                                                    <div class="form-group form-floating-label">
-                                                        <label for="complement">Complamento</label>
-                                                        {!! Form::text('complement', null, ['id '=> 'complement',  'class' => 'form-control', 'placeholder' => 'Complemento']) !!}
+                                                        <label for="date">Data<span class="required-label">*</span></label></label>
+                                                        {!! Form::date('date', null, ['id '=> 'date',  'class' => 'form-control', 'placeholder' => 'Data', 'type' => 'date', 'required' => true]) !!}
                                                     </div>
                                                 </div>
                                             </div>
@@ -175,7 +146,7 @@
 								<div class="card-action">
                                     {!! Form::submit('Atualizar', ['class' => 'btn btn-success']) !!}
                                     {!! Form::close() !!}
-									<a href="{{route('student.index')}}" class="btn btn-danger">Cancel</a>
+									<a href="{{route('expense.index')}}" class="btn btn-danger">Cancel</a>
 								</div>
 							</div>
 						</div>

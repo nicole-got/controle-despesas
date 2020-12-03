@@ -21,16 +21,16 @@ class DashboardController extends Controller
 
     public function Index()
     {
-        $students = \App\Entities\Student::paginate(3);
-        foreach($students as $key => $student){
-            $c = \App\Entities\Course::find($student->course_id);
-            $students[$key]->course_id = $c->name;
+        $expenses = \App\Entities\Expense::all();
+        foreach($expenses as $key => $expense){
+            $u = $this->repository->find($expense->user_id);
+            $expenses[$key]->user_id = $u->name;
         }
-        $courses = \App\Entities\Course::paginate(3);
+        $users = $this->repository->all();
 
         return view('user.dashboard', [
-            'students' => $students,
-            'courses' => $courses,
+            'expenses' => $expenses,
+            'users' => $users,
         ]);
     }
 

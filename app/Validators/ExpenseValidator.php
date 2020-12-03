@@ -5,21 +5,15 @@ namespace App\Validators;
 use \Prettus\Validator\Contracts\ValidatorInterface;
 use \Prettus\Validator\LaravelValidator;
 
-/**
- * Class CourseValidator.
- *
- * @package namespace App\Validators;
- */
-class CourseValidator extends LaravelValidator
+class ExpenseValidator extends LaravelValidator
 {
-    /**
-     * Validation Rules
-     *
-     * @var array
-     */
     protected $rules = [
         ValidatorInterface::RULE_CREATE => [
-            'name' => "required"
+            'user_id' => "required",
+            'description'=> "required",
+            'date'=>"required",
+            'image'=> "required",
+            'value'=> "required"
         ],
         ValidatorInterface::RULE_UPDATE => [],
     ];

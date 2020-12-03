@@ -18,8 +18,7 @@ Route::get('/cadastro', 'App\Http\Controllers\Controller@cadastrar');
 Route::post('/auth', ['as'=> 'user.login', 'uses' => 'App\Http\Controllers\DashboardController@auth']);
 Route::get('/dashboard', ['as'=> 'user.dashboard', 'uses' => 'App\Http\Controllers\DashboardController@index']);
 Route::get('/cadastrar', ['as'=> 'user.cadastrar', 'uses' => 'App\Http\Controllers\UsersController@cadastrar']);
-Route::any('students/search', ['as'=>'student.search', 'uses' => 'App\Http\Controllers\StudentsController@search']);
+Route::any('expenses/search', ['as'=>'expense.search', 'uses' => 'App\Http\Controllers\ExpensesController@search']);
 Route::resource('user', 'App\Http\Controllers\UsersController');
-Route::resource('student', 'App\Http\Controllers\StudentsController');
-Route::resource('course', 'App\Http\Controllers\CoursesController');
+Route::resource('expense', 'App\Http\Controllers\ExpensesController');
 

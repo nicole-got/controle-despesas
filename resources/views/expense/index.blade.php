@@ -2,7 +2,7 @@
 <html lang="en">
 <head>
 	<meta http-equiv="X-UA-Compatible" content="IE=edge" />
-	<title>Curso</title>
+	<title>Despesa</title>
 	<meta content='width=device-width, initial-scale=1.0, shrink-to-fit=no' name='viewport' />
 	<link rel="icon" href="../https://via.placeholder.com/32x32" type="image/x-icon"/>
 	
@@ -58,16 +58,22 @@
 			<div class="sidebar-wrapper scrollbar scrollbar-inner">
 				<div class="sidebar-content">
 					<ul class="nav nav-secondary">
+                        <li class="nav-item">
+							<a href="{{route('user.dashboard')}}">
+								<i class="far fa-calendar-alt"></i>
+								<p>Dashboard</p>
+							</a>
+						</li>
 						<li class="nav-item">
-							<a href="{{route('student.index')}}">
+							<a href="{{route('expense.index')}}">
 								<i class="fas fa-desktop"></i>
-								<p>Aluno</p>
+								<p>Despesa</p>
 							</a>
                         </li>
                         <li class="nav-item">
-							<a href="{{route('course.index')}}">
+							<a href="{{route('user.index')}}">
 								<i class="fas fa-desktop"></i>
-								<p>Curso</p>
+								<p>Usuário</p>
 							</a>
 						</li>
 					</ul>
@@ -78,47 +84,62 @@
 			<div class="content">
 				<div class="page-inner">
 					<div class="page-header">
-						<h4 class="page-title">Curso</h4>
+						<h4 class="page-title">Despesa</h4>
 						<ul class="breadcrumbs">
 						</ul>
 					</div>
 					<div class="row">
-						<div class="col-md-6">
+						<div class="col-md-12">
 							<div class="card">
 								<div class="card-header">
-									<div class="card-title">Novo Curso - Manual</div>
+									<div class="card-title">Nova Despesa</div>
 								</div>
 								<div class="card-body">
 									<div class="row">
 										<div class="col-md-12 col-lg-12">
-                                            {!! Form::open(['route'=>'course.store', 'method'=> 'post']) !!}
-											<div class="form-group">
-                                                <label for="name">Nome</label>
-                                                {!! Form::text('name', null, ['id '=> 'name',  'class' => 'form-control', 'placeholder' => 'Curso','required' => true]) !!}
+                                            {!! Form::open(['route'=>'expense.store', 'method'=> 'post','enctype'=>"multipart/form-data"]) !!}
+                                            <div class="row">
+                                                <div class="col-md-12 col-lg-12">
+                                                    <div class="form-group form-show-validation row">
+                                                        <label class="text-right">Upload Image <span class="required-label">*</span></label>
+                                                        <div class="col-lg-4 col-md-9 col-sm-8">
+                                                            <div class="input-file input-file-image">
+                                                                <img class="img-upload-preview img-circle" width="100" height="100" src="https://placehold.it/100x100" alt="preview">
+                                                                {!! Form::file('image', ['name' => 'image','id '=> 'uploadImg',  'class' => 'form-control form-control-file','accept'=>"image/*", 'required' => true]) !!}
+                                                                <label for="uploadImg" class="btn btn-primary btn-round btn-lg"><i class="fa fa-file-image"></i> Upload a Image</label>
+                                                            </div>
+                                                        </div>
+                                                    </div>
+                                                </div>
                                             </div>
-										</div>
-									</div>
-								</div>
-								<div class="card-action">
-                                    {!! Form::submit('Cadastrar', ['class' => 'btn btn-success']) !!}
-                                    {!! Form::close() !!}
-									<button class="btn btn-danger">Cancel</button>
-								</div>
-							</div>
-						</div>
-						<div class="col-md-6">
-							<div class="card">
-								<div class="card-header">
-									<div class="card-title">Novo Curso - Arquivo XML</div>
-								</div>
-								<div class="card-body">
-									<div class="row">
-										<div class="col-md-12 col-lg-12">
-                                            {!! Form::open(['route'=>'course.store', 'method'=> 'post', 'enctype'=>"multipart/form-data"]) !!}
-                                            <div class="form-group">
-                                                <label for="exampleFormControlFile1">Arquivo</label>
-                                                {!! Form::file('curso_xml', ['name' => 'curso_xml','id '=> 'exampleFormControlFile1',  'class' => 'form-control-file', 'required' => true]) !!}
-											</div>
+                                            <div class="row">
+                                                <div class="col-md-6 col-lg-6">
+                                                    <div class="form-group">
+                                                        <label for="user_id">Usuário<span class="required-label">*</span></label></label>
+                                                        {!! Form::select('user_id', $users ?? [], null, ['id '=> 'user',  'class' => 'form-control', 'required' => true]) !!}
+                                                    </div>
+                                                </div>
+                                                <div class="col-md-6 col-lg-6">
+                                                    <div class="form-group">
+                                                        <label for="description">Descrição<span class="required-label">*</span></label></label>
+                                                        {!! Form::text('description', null, ['id '=> 'description',  'class' => 'form-control', 'placeholder' => 'Descrição', 'required' => true]) !!}
+                                                    </div>
+                                                </div>
+                                            </div>
+                                            <div class="row">
+                                                <div class="col-md-6 col-lg-6">
+                                                    <div class="form-group form-floating-label">
+                                                        <label for="value">Valor<span class="required-label">*</span></label></label>
+                                                        {!! Form::text('value', null, ['id '=> 'value',  'class' => 'form-control', 'placeholder' => '999999.00', 'type' => 'value', 'required' => true]) !!}
+                                                    </div>
+                                                </div>  
+                                                <div class="col-md-6 col-lg-6">
+                                                    <div class="form-group form-floating-label">
+                                                        <label for="date">Data<span class="required-label">*</span></label></label>
+                                                        {!! Form::date('date', null, ['id '=> 'date',  'class' => 'form-control', 'placeholder' => 'Data', 'type' => 'date', 'required' => true]) !!}
+                                                    </div>
+                                                </div>
+                                            </div>
 										</div>
 									</div>
 								</div>
@@ -129,41 +150,63 @@
 							</div>
                         </div>
                         <div class="col-md-12">
-                            <div class="card">
-                                <div class="card-header">
-                                    <div class="card-title">Cursos</div>
-                                </div>
-                                <div class="card-body">
-                                    @if($courses == "[]" )
-                                        <div class="text-center">Não há cursos cadastrados</div>
+                            
+							<div class="card">
+								<div class="card-header">
+									<div class="card-title">Despesas</div>
+								</div>
+								<div class="card-body">
+									@if($expenses == "[]" || '')
+										<div class="text-center">Não há despesas cadastrados</div>
                                     @else
-                                        <table class="table table-head-bg-success">
-                                            <thead>
-                                                <tr>
-                                                    <th scope="col">#</th>
-                                                    <th scope="col">Nome</th>
-                                                    <th scope="col">Ação</th>
-                                                </tr>
-                                            </thead>
-                                            <tbody>
-                                                @foreach($courses as $course)
-                                                    <tr>
-                                                        <td>{{$course->id}}</td>
-                                                        <td>{{$course->name}}</td>
+                                        <div class="row">
+                                            <div class="col-md-6 col-lg-6">
+                                                {!! Form::open( ['route' => ['expense.search'], 'method' => 'post']) !!}
+                                                    {!! Form::text('id', null, ['id '=> 'id',  'class' => ' form-control-sm', 'type' => 'search', 'placeholder' => 'ID Despesa']) !!}
+                                                    {!! Form::submit('Pesquisar', ['class'=> 'btn btn-primary btn-round ml-auto']) !!}
+                                                {!! Form::close() !!}
+                                            </div>
+                                        </div>
+                                        <br>
+										<table class="table table-head-bg-danger">
+											<thead>
+												<tr>
+													<th scope="col">#</th>
+													<th scope="col">Foto</th>
+													<th scope="col">Usuário</th>
+													<th scope="col">Descrição</th>
+													<th scope="col">Valor</th>
+													<th scope="col">Data</th>
+													<th scope="col">Ação</th>
+												</tr>
+											</thead>
+											<tbody>
+												@foreach($expenses as $expense)
+													<tr>
+                                                        <td>{{$expense->id}}</td>
                                                         <td>
-                                                            {!! Form::open( ['route' => ['course.destroy', $course->id ], 'method' => 'delete']) !!}
-                                                                {!! Form::submit('Remover') !!}
-                                                            {!! Form::close() !!}
-                                                        <a href="{{ route('course.edit', $course->id) }}">Editar</a>
+                                                            <div class="notif-img"> 
+                                                                <img  src="{{ asset('/storage/img/'.$expense->image.'') }}" alt="Img Profile" style="max-width: 80px;max-height: 100px;">
+                                                                {{-- <img src="https://via.placeholder.com/50x50" alt="Img Profile"> --}}
+                                                            </div>
                                                         </td>
-                                                    </tr>
-                                                @endforeach
-                                            </tbody>
-                                        </table>
-                                        {!! $courses->links() !!}
-                                    @endif
-                                </div>
-                            </div>
+														<td>{{$expense->user_id}}</td>
+														<td>{{$expense->description}}</td>
+														<td>{{'R$ '.number_format($expense->value,2, ',', '.' ) }}</td>
+														<td>{{date('d/m/Y', strtotime($expense->date))}}</td>
+														<td>
+															{!! Form::open( ['route' => ['expense.destroy', $expense->id ], 'method' => 'delete']) !!}
+																{!! Form::submit('Remover') !!}
+															{!! Form::close() !!}
+														<a href="{{ route('expense.edit', $expense->id) }}">Editar</a>
+														</td>
+													</tr>
+												@endforeach
+											</tbody>
+										</table>
+									@endif
+								</div>
+							</div>
                         </div>
 					</div>
 				</div>
@@ -254,10 +297,12 @@
         <!-- Millenium DEMO methods, don't include it in your project! -->
         <script src="{{ asset('assets/js/setting-demo2.js') }}"></script>
         <script>
-            
-            var element = document.getElementsByTagName("svg");
-            element[0].removeAttribute("viewBox");
-            element[1].removeAttribute("viewBox");
+            $(document).ready(function(){
+                console.log("entrou")
+                $('#value').mask('99.9999,00');
+            });
+        </script>
+        <script>
             $('#displayNotif').on('click', function(){
                 var placementFrom = $('#notify_placement_from option:selected').val();
                 var placementAlign = $('#notify_placement_align option:selected').val();

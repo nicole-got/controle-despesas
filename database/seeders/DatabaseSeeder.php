@@ -4,8 +4,7 @@ namespace Database\Seeders;
 
 use Illuminate\Database\Seeder;
 use App\Entities\User;
-use App\Entities\Student;
-use App\Entities\Course;
+use App\Entities\Expense;
 
 class DatabaseSeeder extends Seeder
 {
@@ -21,20 +20,12 @@ class DatabaseSeeder extends Seeder
             'email'     =>  "teste123456@gmail.com",
             'password'  =>  "123456",
         ]);
-        Student::create([
-            'course_id'     =>  1,
-            'name'          =>  "aluno1",
-            'registration'  =>  "123555",
-            'uf'            =>  "mg",
-            'city'          =>  "belo horizonte",
-            'cep'           =>  "36554214",
-            'neighborhood'  =>  "jardim certo",
-            'street'        =>  "rua B",
-            'number'        =>  "251",
-            'complement'    =>  "casa",
-        ]);
-        Course::create([
-            'name'          =>  "sistemas",
+        Expenses::create([
+            'user_id'       =>  1,
+            'description'   =>  "primeira despesa do mes",
+            'date'          =>  "2020-12-02",
+            'image'         =>  "image.png",
+            'value'         =>  "10",
         ]);
     }
 }

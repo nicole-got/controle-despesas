@@ -4,16 +4,16 @@ namespace App\Services;
 
 use Illuminate\Database\QueryExceprion;
 use Exceprion;
-use App\Repositories\StudentRepository;
-use App\Validators\StudentValidator;
+use App\Repositories\ExpenseRepository;
+use App\Validators\ExpenseValidator;
 use Prettus\Validator\Contracts\ValidatorInterface;
 
-class StudentService
+class ExpenseService
 {
     private $repository;
     private $validator;
 
-    public function __construct(StudentRepository $repository, StudentValidator $validator)
+    public function __construct(ExpenseRepository $repository, ExpenseValidator $validator)
     {
         $this->repository = $repository;
         $this->validator = $validator;
@@ -21,12 +21,12 @@ class StudentService
 
     public function search($id){
         if(!$id) {
-            $student = $this->repository->paginate(3);
+            $expense = $this->repository->paginate(3);
         }else{
-            $student = $this->repository->where("id",$id)->paginate(3);
+            $expense = $this->repository->where("id",$id)->paginate(3);
         }
         
-        return $student;
+        return $expense;
     }
 
     public function store($data)
@@ -35,12 +35,12 @@ class StudentService
         {
             $this->validator->with($data)->passesOrFail(ValidatorInterface::RULE_CREATE);
 
-            $student = $this->repository->create($data);
+            $expense = $this->repository->create($data);
             return 
             [
                 'success'   => true,
                 'messages'   => 'Aluno criado',
-                'data'      => $student
+                'data'      => $expense
             ];
         }
         catch(Exception $err)
@@ -61,12 +61,12 @@ class StudentService
         {
             $this->validator->with($data)->passesOrFail(ValidatorInterface::RULE_UPDATE);
 
-            $student = $this->repository->update($data, $id);
+            $expense = $this->repository->update($data, $id);
             return 
             [
                 'success'   => true,
                 'messages'   => 'Aluno Atualizado',
-                'data'      => $student
+                'data'      => $expense
             ];
         }
         catch(Exception $err)
@@ -89,7 +89,7 @@ class StudentService
             $this->repository->delete($id);
             return  [
                 'success'   => true,
-                'messages'   => 'Aluno removido'
+                'messages'   => 'Despesa removida'
             ];
         }
         catch(Exception $err)

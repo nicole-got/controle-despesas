@@ -64,22 +64,16 @@
 								<p>Dashboard</p>
 							</a>
 						</li>
-						{{-- <li class="nav-item">
-							<a href="{{route('user.index')}}">
-								<i class="far fa-calendar-alt"></i>
-								<p>Usuario</p>
-							</a>
-						</li> --}}
 						<li class="nav-item">
-							<a href="{{route('student.index')}}">
+							<a href="{{route('expense.index')}}">
 								<i class="fas fa-desktop"></i>
-								<p>Aluno</p>
+								<p>Despesa</p>
 							</a>
                         </li>
                         <li class="nav-item">
-							<a href="{{route('course.index')}}">
+							<a href="{{route('user.index')}}">
 								<i class="fas fa-desktop"></i>
-								<p>Curso</p>
+								<p>Usuário</p>
 							</a>
 						</li>
 					</ul>
@@ -110,16 +104,15 @@
 										<div class="col-md-12 col-lg-12">
                                             {!! Form::open(['route'=>'user.store', 'method'=> 'post']) !!}
                                             <div class="form-group">
-                                                <label for="name">Nome</label>
+                                                <label for="name">Nome<span class="required-label">*</span></label></label></label>
                                                 {!! Form::text('name', null, ['id '=> 'nome',  'class' => 'form-control', 'placeholder' => 'Nome', 'type' => 'email', 'required' => true]) !!}
 											</div>
 											<div class="form-group">
-                                                <label for="email2">Email Address</label>
+                                                <label for="email2">Email Address<span class="required-label">*</span></label></label></label>
                                                 {!! Form::text('email', null, ['id '=> 'email2',  'class' => 'form-control', 'placeholder' => 'Email', 'type' => 'email', 'required' => true]) !!}
-												<small id="emailHelp2" class="form-text text-muted">We'll never share your email with anyone else.</small>
 											</div>
 											<div class="form-group">
-                                                <label for="password">Password</label>
+                                                <label for="password">Password<span class="required-label">*</span></label></label></label>
                                                 {!! Form::password('password', ['id '=> 'password', 'class'=> 'form-control', 'placeholder'=>'Senha', 'type' => 'password', 'required' => true]) !!}
                                             </div>
 										</div>
