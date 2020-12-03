@@ -45,7 +45,7 @@ class DashboardController extends Controller
         try
         {
             $user = $this->repository->findWhere($data)->first();
-            if(!$user) throw new Exception("Credenciais inválidas");
+            if(!$user) return view('error');
 
             Auth::login($user);
             return redirect()->route('user.dashboard');

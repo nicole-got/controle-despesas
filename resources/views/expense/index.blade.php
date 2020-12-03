@@ -186,7 +186,7 @@
                                                         <td>{{$expense->id}}</td>
                                                         <td>
                                                             <div class="notif-img"> 
-                                                                <img  src="{{ asset('/storage/img/'.$expense->image.'') }}" alt="Img Profile" style="max-width: 80px;max-height: 100px;">
+                                                                <img  src="{{ asset('storage/img/'.$expense->image.'') }}" alt="Img Profile" style="max-width: 80px;max-height: 100px;">
                                                                 {{-- <img src="https://via.placeholder.com/50x50" alt="Img Profile"> --}}
                                                             </div>
                                                         </td>

@@ -13,6 +13,7 @@ use Illuminate\Support\Facades\Route;
 |
 */
 Route::get('/', ['as'=>'viewlogin','uses' => 'App\Http\Controllers\Controller@viewlogin']);
+Route::get('/error', ['as'=>'error','uses' => 'App\Http\Controllers\Controller@error']);
 Route::get('/cadastro', 'App\Http\Controllers\Controller@cadastrar');
 
 Route::post('/auth', ['as'=> 'user.login', 'uses' => 'App\Http\Controllers\DashboardController@auth']);

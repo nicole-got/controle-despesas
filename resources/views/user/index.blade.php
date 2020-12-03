@@ -121,8 +121,9 @@
 								<div class="card-action">
                                     {!! Form::submit('Cadastrar', ['class' => 'btn btn-success']) !!}
                                     {!! Form::close() !!}
-									{{-- <button class="btn btn-success">Submit</button> --}}
-									<button class="btn btn-danger">Cancel</button>
+									<a href="{{route('user.dashboard')}}">
+                                        <button class="btn btn-danger">Cancel</button>
+                                    </a>
 								</div>
 							</div>
 						</div>

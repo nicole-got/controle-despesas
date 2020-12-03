@@ -29,4 +29,10 @@ class Controller extends BaseController
     {
         return view('user.login');
     }
+
+    
+    public function error()
+    {
+        return view('error');
+    }
 }
